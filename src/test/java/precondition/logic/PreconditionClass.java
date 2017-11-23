@@ -1,9 +1,10 @@
 package precondition.logic;
 
 import helpers.MainClass;
-import org.testng.ITestContext;
-import org.testng.annotations.*;
 import org.apache.log4j.Logger;
+import org.testng.ITestContext;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 
 import java.io.IOException;
 
@@ -26,10 +27,6 @@ public class PreconditionClass {
         } catch (Exception e) {
             log.error("Catch " + e);
         }
-    }
-
-    public void setContext(ITestContext context) {
-        context.setAttribute("app", mainClass);
     }
 
     public void runInit() throws IOException {

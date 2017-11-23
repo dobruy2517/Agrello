@@ -16,14 +16,14 @@ CreateDataForTests extends PreconditionClass {
     }
 
     @DataProvider
-    public Object[][] userType(){
+    public Object[][] userType() {
         return new Object[][]{
                 {"Individual"},
                 {"Company"},
         };
     }
 
-    @Test (priority = 2)
+    @Test(priority = 2)
     public void createTestPasswordTest() throws IOException {
         Assert.assertTrue(mainClass.getRegisterPageClass().createPassword());
     }

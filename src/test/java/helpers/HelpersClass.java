@@ -1,13 +1,12 @@
 package helpers;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,7 +16,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Random;
 
 public class HelpersClass {
@@ -42,38 +40,24 @@ public class HelpersClass {
         js = (JavascriptExecutor) driver;
     }
 
-    public void goToUrl(String url){
+    public void goToUrl(String url) {
         driver.get(testUrl + url);
     }
 
-    public void getDataFromFile() throws IOException {
-        FileInputStream inFile = new FileInputStream(folderPath + "text.txt");
-        byte[] str = new byte[inFile.available()];
-        inFile.read(str);
-        String text = new String(str);
-        String[] mass = text.split("\r\n");
-        testUrl = mass[3];
-    }
-
-    public boolean isElementPresent(By element){
+    public boolean isElementPresent(By element) {
         boolean flag = false;
         scrollToelement(df(element));
-        if(df(element).isDisplayed()){
+        if (df(element).isDisplayed()) {
             flag = true;
             log.info("WebElement is present");
         } else log.error("WebElement is not present");
         return flag;
     }
 
-    public WebElement df (By locator){
-        return  driver.findElement(locator);
+    public WebElement df(By locator) {
+        return driver.findElement(locator);
     }
 
-    public List<WebElement> dfs (By locator){
-        wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-        List<WebElement> el = driver.findElements(locator);
-        return el;
-    }
 
     public void presenceOfElementLocatedClick(By locator) {
         wait.until(ExpectedConditions.presenceOfElementLocated(locator)).click();
@@ -87,15 +71,16 @@ public class HelpersClass {
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
-    public boolean textToBePresentInElementValue(By locator, By locator_1,  String value) {
+    public boolean textToBePresentInElementValue(By locator, By locator_1, String value) {
         return wait.until(ExpectedConditions.textToBePresentInElementValue(locator, df(locator_1).getAttribute(value)));
     }
 
     public void writeDataClient(String paramName, String paramValue) throws IOException {
         try {
             boolean flagWrite = true;
-            if(searchParam(paramName)){update(paramName, paramValue);}
-            else {
+            if (searchParam(paramName)) {
+                update(paramName, paramValue);
+            } else {
                 FileWriter writer;
                 File f = new File(folderPath + "data_client.txt");
                 if (!f.exists()) {
@@ -107,8 +92,7 @@ public class HelpersClass {
                 writer.flush();
                 writer.close();
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             log.error("Catch " + e);
         }
     }
@@ -135,37 +119,21 @@ public class HelpersClass {
 
     public String searchParamString(String paramName) throws IOException {
         String value = "";
-        FileInputStream inFile = new FileInputStream(folderPath+"data_client.txt");
+        FileInputStream inFile = new FileInputStream(folderPath + "data_client.txt");
         byte[] str = new byte[inFile.available()];
         inFile.read(str);
         String text = new String(str);
-        if(text.contains(paramName)){
+        if (text.contains(paramName)) {
             String[] mass = text.split("\r\n");
-            for(int i = 0; i<mass.length; i++){
-                if(mass[i].contains(paramName)){
-                    value = mass[i]; break;
+            for (int i = 0; i < mass.length; i++) {
+                if (mass[i].contains(paramName)) {
+                    value = mass[i];
+                    break;
                 }
             }
         }
         return value;
     }
-
-    public void getClientDataForAuth() throws IOException {
-//        create_directory();
-        getLd().setClientEmail(getDataClient(getLd().getClientEmailName()));
-        getLd().setCompanyEmail(getDataClient(getLd().getCompanyEmailName()));
-        getLd().setClientPassword(getDataClient(getLd().getClientPasswordName()));
-
-    }
-
-   /* public void create_directory(){
-        String s;
-        File myPath = new File("c:\\dataProjects\\" + s + "_us_widgets_data");
-        myPath.mkdirs();
-
-        clientPath = new File("C:\\dataProjects\\" + s + "_us_data_temporary_client");
-        clientPath.mkdirs();
-    }*/
 
     public String getDataClient(String paramName) throws IOException {
         String value = "";
@@ -173,11 +141,11 @@ public class HelpersClass {
         byte[] str = new byte[inFile.available()];
         inFile.read(str);
         String text = new String(str);
-        if(text.contains(paramName)){
+        if (text.contains(paramName)) {
             String[] mass = text.split("\r\n");
-            for(int i = 0; i<mass.length; i++){
-                if(mass[i].contains(paramName)){
-                    value = mass[i].substring(mass[i].indexOf(":")+1, mass[i].length());
+            for (int i = 0; i < mass.length; i++) {
+                if (mass[i].contains(paramName)) {
+                    value = mass[i].substring(mass[i].indexOf(":") + 1, mass[i].length());
                     break;
                 }
             }
@@ -196,7 +164,7 @@ public class HelpersClass {
         return String.valueOf(sb);
     }
 
-    public void click(By locator){
+    public void click(By locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
     }
 
@@ -204,7 +172,7 @@ public class HelpersClass {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", webelement);
     }
 
-    public String getAttribute(By locator, String attributeName){
+    public String getAttribute(By locator, String attributeName) {
         return df(locator).getAttribute(attributeName);
     }
 

@@ -18,7 +18,8 @@ public class MainClass {
     private ListData ld;
     private Logger log;
 
-    public MainClass(){}
+    public MainClass() {
+    }
 
     public HelpersClass getHelpersClass() {
         return helpersClass;
@@ -28,7 +29,7 @@ public class MainClass {
         return registerPageClass;
     }
 
-    public void init(){
+    public void init() {
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource("chromedriver").getFile());
         System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
@@ -40,12 +41,16 @@ public class MainClass {
         ld = new ListData();
     }
 
-    public boolean hasQuit() { return ((RemoteWebDriver)driver).getSessionId() == null; }
+    public boolean hasQuit() {
+        return ((RemoteWebDriver) driver).getSessionId() == null;
+    }
 
-    public boolean hasLive() { return driver == null; }
+    public boolean hasLive() {
+        return driver == null;
+    }
 
     public void close() {
-        if(!(hasLive() || hasQuit())){
+        if (!(hasLive() || hasQuit())) {
             driver.quit();
         }
         driver = null;
@@ -57,13 +62,14 @@ public class MainClass {
                 driver.quit();
             }
             driver = null;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             log.error("Catch stop - " + e);
         }
     }
 
-    public void checkDriverLiveAndStart() throws IOException {if(hasLive() || hasQuit()){
-        init();
-    }}
+    public void checkDriverLiveAndStart() throws IOException {
+        if (hasLive() || hasQuit()) {
+            init();
+        }
+    }
 }

@@ -19,10 +19,11 @@ public class Properties {
 
     private static final Properties INSTANCE = new Properties();
 
-    public static Properties getInstance(){
+    public static Properties getInstance() {
         return INSTANCE;
     }
-    public String getResourceByName(String name){
+
+    public String getResourceByName(String name) {
         return property.getProperty(name);
     }
 }

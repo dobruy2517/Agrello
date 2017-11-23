@@ -7,11 +7,11 @@ import precondition.logic.PreconditionClass;
 
 import java.io.IOException;
 
-public class RegisterPageTest extends PreconditionClass{
+public class RegisterPageTest extends PreconditionClass {
 
 
     @Test(priority = 1, dataProvider = "elementsOnRegisterPage")
-    public void checkElementsOnRegisterFormTest(String userType){
+    public void checkElementsOnRegisterFormTest(String userType) {
         log.info("test is started");
         mainClass.getHelpersClass().goToUrl("register");
         Assert.assertTrue(mainClass.getRegisterPageClass().checkElementsOnRegisterForm(userType));
@@ -19,7 +19,7 @@ public class RegisterPageTest extends PreconditionClass{
     }
 
     @DataProvider
-    public Object[][] elementsOnRegisterPage(){
+    public Object[][] elementsOnRegisterPage() {
         return new Object[][]{
                 {"Individual"},
                 {"Company"},
@@ -35,7 +35,7 @@ public class RegisterPageTest extends PreconditionClass{
     }
 
     @DataProvider
-    public Object[][] userType(){
+    public Object[][] userType() {
         return new Object[][]{
                 {"Individual"},
                 {"Company"},
@@ -51,7 +51,7 @@ public class RegisterPageTest extends PreconditionClass{
     }
 
     @DataProvider
-    public Object[][] dataForLogin(){
+    public Object[][] dataForLogin() {
         return new Object[][]{
                 {"Individual"},
                 {"Company"},

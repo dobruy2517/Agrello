@@ -1,9 +1,9 @@
 package helpers;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.apache.log4j.Logger;
 
 public class BaseClass {
     /**
@@ -27,7 +27,6 @@ public class BaseClass {
     protected Logger log;
 
     /**
-     *
      * @param driver
      * @param helper
      */

@@ -47,32 +47,32 @@ public class RegisterPageClass extends BaseClass {
 
     public boolean checkElementsOnRegisterForm(String userType) {
         boolean flag = false;
-            if (userType.equals("Individual")) {
-                if (helper.isElementPresent(individualFirstName) &&
-                        helper.isElementPresent(individualLastName) &&
-                        helper.isElementPresent(individualEmail) &&
-                        helper.isElementPresent(individualPassword) &&
-                        helper.isElementPresent(individualPasswordConfirmation) &&
-                        helper.isElementPresent(individualAcceptTockenCheckbox)) {
-                    flag = true;
-                    log.info("All elements present");
-                }
-            } else  if(userType.equals("Company")){
-                helper.presenceOfElementLocatedClick(companyUserType);
-                if (helper.isElementPresent(companyName) &&
-                        helper.isElementPresent(companyAddress) &&
-                        helper.isElementPresent(companyVatNumber) &&
-                        helper.isElementPresent(companyRegistrationCode) &&
-                        helper.isElementPresent(individualFirstName) &&
-                        helper.isElementPresent(individualLastName) &&
-                        helper.isElementPresent(individualEmail) &&
-                        helper.isElementPresent(individualPassword) &&
-                        helper.isElementPresent(individualPasswordConfirmation) &&
-                        helper.isElementPresent(individualAcceptTockenCheckbox)) {
-                    flag = true;
-                    log.info("All elements present");
-                }
+        if (userType.equals("Individual")) {
+            if (helper.isElementPresent(individualFirstName) &&
+                    helper.isElementPresent(individualLastName) &&
+                    helper.isElementPresent(individualEmail) &&
+                    helper.isElementPresent(individualPassword) &&
+                    helper.isElementPresent(individualPasswordConfirmation) &&
+                    helper.isElementPresent(individualAcceptTockenCheckbox)) {
+                flag = true;
+                log.info("All elements present");
             }
+        } else if (userType.equals("Company")) {
+            helper.presenceOfElementLocatedClick(companyUserType);
+            if (helper.isElementPresent(companyName) &&
+                    helper.isElementPresent(companyAddress) &&
+                    helper.isElementPresent(companyVatNumber) &&
+                    helper.isElementPresent(companyRegistrationCode) &&
+                    helper.isElementPresent(individualFirstName) &&
+                    helper.isElementPresent(individualLastName) &&
+                    helper.isElementPresent(individualEmail) &&
+                    helper.isElementPresent(individualPassword) &&
+                    helper.isElementPresent(individualPasswordConfirmation) &&
+                    helper.isElementPresent(individualAcceptTockenCheckbox)) {
+                flag = true;
+                log.info("All elements present");
+            }
+        }
         return flag;
     }
 
@@ -152,7 +152,7 @@ public class RegisterPageClass extends BaseClass {
         boolean flag = false;
         String eMail;
         driver.get("https://temp-mail.ru/option/change");
-        if(userType.equals("Individual")) {
+        if (userType.equals("Individual")) {
             helper.presenceOfElementLocatedAndSendKey(mailLoginInputfield, mailValue);
             helper.presenceOfElementLocatedClick(createNewMailAddress);
             helper.presenceOfElementLocated(By.cssSelector(".alert-success"));
@@ -183,10 +183,10 @@ public class RegisterPageClass extends BaseClass {
         String str = "";
         driver.get("https://temp-mail.ru/");
         helper.presenceOfElementLocatedClick(createNewAddressLink);
-        if(userType.equals("Individual")) {
+        if (userType.equals("Individual")) {
             str = helper.getDataClient(helper.getLd().getClientEmailName());
             str = str.split("@")[0];
-        } else if (userType.equals("Company")){
+        } else if (userType.equals("Company")) {
             str = helper.getDataClient(helper.getLd().getCompanyEmailName());
             str = str.split("@")[0];
         }
@@ -211,20 +211,20 @@ public class RegisterPageClass extends BaseClass {
 
     public boolean checkUserLogin(String userType) throws IOException {
         boolean flag = false;
-        if (userType.equals("Individual")){
+        if (userType.equals("Individual")) {
             helper.presenceOfElementLocatedAndSendKey(loginEmail, helper.getDataClient(helper.getLd().getClientEmailName()));
             helper.presenceOfElementLocatedAndSendKey(loginPassword, helper.getDataClient(helper.getLd().getClientPasswordName()));
             helper.click(loginSubmit);
-            if(helper.isElementPresent(By.id("invest"))&&
-                    driver.getCurrentUrl().contains("/home")){
+            if (helper.isElementPresent(By.id("invest")) &&
+                    driver.getCurrentUrl().contains("/home")) {
                 flag = true;
             }
-        } else  if (userType.equals("Company")){
+        } else if (userType.equals("Company")) {
             helper.presenceOfElementLocatedAndSendKey(loginEmail, helper.getDataClient(helper.getLd().getCompanyEmailName()));
             helper.presenceOfElementLocatedAndSendKey(loginPassword, helper.getDataClient(helper.getLd().getClientPasswordName()));
             helper.click(loginSubmit);
-            if(helper.isElementPresent(By.id("invest"))&&
-                    driver.getCurrentUrl().contains("/home")){
+            if (helper.isElementPresent(By.id("invest")) &&
+                    driver.getCurrentUrl().contains("/home")) {
                 flag = true;
             }
         }

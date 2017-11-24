@@ -1,5 +1,6 @@
 package helpers;
 
+import logic.PurchaseOrderClass;
 import logic.RegisterPageClass;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
@@ -14,11 +15,19 @@ public class MainClass {
 
 
     private RegisterPageClass registerPageClass;
+
+
+    private PurchaseOrderClass purchaseOrderClass;
+
     private HelpersClass helpersClass;
     private ListData ld;
     private Logger log;
 
     public MainClass() {
+    }
+
+    public PurchaseOrderClass getPurchaseOrderClass() {
+        return purchaseOrderClass;
     }
 
     public HelpersClass getHelpersClass() {
@@ -36,6 +45,7 @@ public class MainClass {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         registerPageClass = new RegisterPageClass((ChromeDriver) driver, helpersClass, ld, log);
+        purchaseOrderClass = new PurchaseOrderClass((ChromeDriver) driver, helpersClass, ld, log);
         helpersClass = new HelpersClass(driver);
         log = Logger.getLogger(getClass());
         ld = new ListData();

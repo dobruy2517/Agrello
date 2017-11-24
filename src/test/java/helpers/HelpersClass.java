@@ -16,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.util.Random;
 
 public class HelpersClass {
@@ -66,6 +67,7 @@ public class HelpersClass {
     public void presenceOfElementLocatedAndSendKey(By locator, String value) {
         wait.until(ExpectedConditions.presenceOfElementLocated(locator)).sendKeys(value);
     }
+
 
     public void presenceOfElementLocated(By locator) {
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
@@ -174,6 +176,20 @@ public class HelpersClass {
 
     public String getAttribute(By locator, String attributeName) {
         return df(locator).getAttribute(attributeName);
+    }
+
+    public Random random = new Random();
+
+    public double randomInRange(double min, double max) {
+        double range = max - min;
+        double scaled = random.nextDouble() * range;
+        double shifted = scaled + min;
+        return shifted; // == (rand.nextDouble() * (max-min)) + min;
+    }
+
+    public double roundTwoDecimals(double d) {
+        DecimalFormat twoDForm = new DecimalFormat("#.##");
+        return Double.valueOf(twoDForm.format(d));
     }
 
 }

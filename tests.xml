@@ -12,4 +12,9 @@
             <class name = "TestTask.RegisterPageTest"/>
         </classes>
     </test>
+    <test name="Purchase">
+        <classes>
+            <class name="TestTask.PurchaseOrderTest"/>
+        </classes>
+    </test>
 </suite>

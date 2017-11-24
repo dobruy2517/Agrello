@@ -153,7 +153,7 @@ public class RegisterPageClass extends BaseClass {
         String eMail;
         driver.get("https://temp-mail.ru/option/change");
         if (userType.equals("Individual")) {
-            helper.presenceOfElementLocatedAndSendKey(mailLoginInputfield, mailValue);
+            helper.presenceOfElementLocatedAndSendKey(mailLoginInputfield, mailValue + helper.randomWord(5));
             helper.presenceOfElementLocatedClick(createNewMailAddress);
             helper.presenceOfElementLocated(By.cssSelector(".alert-success"));
             helper.textToBePresentInElementValue(email, mailLoginInputfield, "value");
@@ -164,7 +164,7 @@ public class RegisterPageClass extends BaseClass {
             log.info("createNewEmailAdress - " + flag);
             helper.writeDataClient(helper.getLd().getClientEmailName(), eMail);
         } else if (userType.equals("Company")) {
-            helper.presenceOfElementLocatedAndSendKey(mailLoginInputfield, mailValue + "_com");
+            helper.presenceOfElementLocatedAndSendKey(mailLoginInputfield, mailValue + "_com" + helper.randomWord(5));
             helper.presenceOfElementLocatedClick(createNewMailAddress);
             helper.presenceOfElementLocated(By.cssSelector(".alert-success"));
             helper.textToBePresentInElementValue(email, mailLoginInputfield, "value");
